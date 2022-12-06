@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax request</title>
+</head>
+<body>
+    <h2 id="reqst"> Ajax request</h2>
+    <button type = "submit" value="Fetch data" id = "fetchdata">Fetch-data</button>
+    <button type = "submit" value="" id = "popBtn">Populate</button>
+    <button type = "submit" id = "Change">Change content</button>
+
+    <div class="container">
+        <h1>Employee data</h1>
+        <ul id="list">
+            <li>
+
+
+            </li>
+        </ul>
+    </div>
+    
+
+   
+</body>
+{% load static %}
+<script src="{% static 'AJAX.js' %}" type="text/javascript"></script>  
+
+</html>

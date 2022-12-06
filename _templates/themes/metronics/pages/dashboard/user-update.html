@@ -1,0 +1,80 @@
+{% extends '_templates/themes/metronics/layouts/dashboard/dashboards.html' %}
+
+{% load static %}
+
+{% block content %}
+    <!--begin::Form-->
+    <div class="col-sm-5  offset-md-3">
+        <form class="form w-100"  id="kt_sign_in_form" method = "POST" action="#">
+            {% csrf_token %}
+            <!--begin::Heading-->
+            <div class="text-center mb-11">
+                <!--begin::Title-->
+                <h1 class="text-dark fw-bolder mb-3">User Information </h1>
+                <!--end::Title-->
+            
+            <!--begin::Input group=-->
+            <div class="fv-row mb-8">
+                <!--begin::Email-->
+                <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" value = "{{update.email}}" />
+                <span class = "fv-plugins-message-container invalid-feedback">
+                    {% for message in messages %}
+                        {% if "mail" in message.tags %}
+                            {{message}}
+                        {% endif %}
+                    {% endfor %}
+                
+            </span>
+            </div>
+            <!--end::Input group=-->
+             <!--begin::Input group=-->
+             <div class="fv-row mb-8">
+                <!--begin::username-->
+                <input type="text" placeholder="Username" name="username" autocomplete="off" class="form-control bg-transparent" value = "{{update.username}}" />
+                <!--end::username-->
+                <span class = "fv-plugins-message-container invalid-feedback">
+                    {% for message in messages %}
+                        {% if "name" in message.tags %}
+                            {{message}}
+                        {% endif %}
+                    {% endfor %}
+                </span>
+            </div>
+            <!--end::Input group=-->
+              <!--begin::Input group=-->
+              <div class="fv-row mb-8">
+                <!--begin::first name-->
+                <input type="text" placeholder="First name" name="first_name" autocomplete="off" class="form-control bg-transparent" value = "{{update.first_name}}" />
+                <!--end::first name-->
+            </div>
+            <!--end::Input group=-->
+              <!--begin::Input group=-->
+              <div class="fv-row mb-8">
+                <!--begin::middle_name-->
+                <input type="text" placeholder="Middle name" name="middle_name" autocomplete="off" class="form-control bg-transparent" value = "{{update.middle_name}}" />
+                <!--end::middle_name-->
+            </div>
+            <!--end::Input group=-->
+            <label for="Password"><strong>Password:</strong></label>
+            <div class="help text-gray-500 text-center fw-semibold fs-6">Raw passwords are not stored, so there is no way to see this user’s password, but you can change the password using <a href="{% url 'password-update' update.id %}">this form</a>.</div><br><br>
+            <div class="d-grid mb-10">
+                <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+                    <!--begin::Indicator label-->
+                    <span class="indicator-label">Update and Save</span>
+                    <!--end::Indicator label-->
+                    <!--begin::Indicator progress-->
+                    <span class="indicator-progress">Please wait...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    <!--end::Indicator progress-->
+                </button>
+            </div>
+        </form>
+    </div>
+    <!--end::Form-->
+{% endblock content%}
+
+{% block page_scripts %}
+
+	<script src="{% static APP_THEME|add:'assets/js/custom/authentication/sign-in/general--custom.js' %}?v={{APP_VERSION}}" type="text/javascript"></script>
+
+{% endblock page_scripts %}

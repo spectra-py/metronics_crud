@@ -1,0 +1,60 @@
+{% extends '_templates/themes/metronics/layouts/dashboard/dashboards.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+        <div class = "container-fluid"><h1 class="d-flex align-items-center text-dark fw-bold my-1 fs-3">Users List</h1></div><br><br>
+        <a href="{% url 'add-user' %}"><img src="{% static APP_THEME|add:'assets/media/misc/download-removebg-preview.png' %}" alt="image" style = "width: 18px;position: absolute; left: 94%;top: 142px;"><div class="icon" style = "font-weight: bold; font-size: larger;position: absolute;
+        left: 1808px; top: 141px;">Create user</div></a>
+    
+        {% if users%} 
+    <div class="container-fluid">
+        <div class="col-sm-15">
+            <table class="table table-hover">
+                <thead>
+                <tr> 
+                    <th scope="col" class="font-bolder"> <strong> ID </strong></th>
+                    <th scope="col" class="font-bolder"> <strong> Email </strong></th>
+                    <th scope="col" class="font-bolder"> <strong> Username </strong></th>
+                    <th scope="col" class="font-bolder"> <strong> First name </strong></th>
+                    <th scope="col" class="font-bolder"> <strong> Middle name </strong></th>
+                    <th scope="col" class="font-bolder"> <strong> Password </strong></th>
+                    <th scope="col" class="font-bolder"> <strong> Action </strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users%}
+                <tr>
+                    <th scope="row">{{user.id}}</th>
+                    <td>{{user.email}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.middle_name}}</td>
+                    <td>{{user.password}}</td>
+                    <td>
+                        <a href="{% url 'dataupdate' user.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{% url 'deletedata' user.id %}"method="post" class="d-inline">                              
+                            {%csrf_token%}
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                
+                {% endfor %}
+                </tbody>
+            {% endif %}
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}
+
+ {% block page_scripts %}
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+{% endblock page_scripts%} 
